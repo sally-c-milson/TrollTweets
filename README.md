@@ -21,7 +21,7 @@ Values are after filtering all tweets that begin with 'RT'
 
 6k - https://www.kaggle.com/benhamner/clinton-trump-tweets
 
-2k + 3k https://www.kaggle.com/adhok93/inauguration-and-womensmarch-tweets
+2k + 3k - https://www.kaggle.com/adhok93/inauguration-and-womensmarch-tweets
 
 395k - https://www.kaggle.com/kinguistics/election-day-tweets#election_day_tweets.csv
 
