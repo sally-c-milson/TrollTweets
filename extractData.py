@@ -52,39 +52,55 @@ def tweetIDFromURL(file):
     target['tweet_id'] = tids.str[-1]
     target.dropna().to_csv(file, header=True)
 
-
+def splitData():
+    data = pd.read_csv('tweet_data.csv', index_col='tweet_id', dtype={'tweet_id': 'int64', 'content': str, 'troll': bool})
+    size = 100000
+    end = size
+    start = 0
+    idx = 0
+    while end < len(data):
+        end = start + size
+        if end > len(data):
+            end = len(data)
+        temp = data[start:end]
+        start = end
+        temp.to_csv('./data_parsed/tweet_data_'+str(idx)+'.csv')
+        idx += 1
 
 if __name__ == '__main__':
-    # It is important this is run first because of the way data is merged
-    # will keep first of duplicate ids
-    filterRetweets()
+    # # It is important this is run first because of the way data is merged
+    # # will keep first of duplicate ids
+    # filterRetweets()
 
-    # 4k - https://www.kaggle.com/arathee2/demonetization-in-india-twitter-data
-    mergeData('./data/demonetization-tweets.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'latin-1')
+    # # 4k - https://www.kaggle.com/arathee2/demonetization-in-india-twitter-data
+    # mergeData('./data/demonetization-tweets.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'latin-1')
 
-    # 6k - https://www.kaggle.com/crowdflower/first-gop-debate-twitter-sentiment
-    mergeData('./data/Sentiment.csv', {'text': 'content', 'tweet_id': 'tweet_id'}, True, 'utf-8')
+    # # 6k - https://www.kaggle.com/crowdflower/first-gop-debate-twitter-sentiment
+    # mergeData('./data/Sentiment.csv', {'text': 'content', 'tweet_id': 'tweet_id'}, True, 'utf-8')
 
-    # 1.6M - https://www.kaggle.com/kazanova/sentiment140
-    mergeData('./data/sentiment140/training.1600000.processed.noemoticon.csv', ['target', 'tweet_id', 'date', 'flag', 'author', 'content'], False, 'latin-1')
+    # # 1.6M - https://www.kaggle.com/kazanova/sentiment140
+    # mergeData('./data/sentiment140/training.1600000.processed.noemoticon.csv', ['target', 'tweet_id', 'date', 'flag', 'author', 'content'], False, 'latin-1')
 
-    # 6k - https://www.kaggle.com/benhamner/clinton-trump-tweets
-    mergeData('./data/tweets.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'utf-8')
+    # # 6k - https://www.kaggle.com/benhamner/clinton-trump-tweets
+    # mergeData('./data/tweets.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'utf-8')
 
-    # 2k + 3k - https://www.kaggle.com/adhok93/inauguration-and-womensmarch-tweets
-    mergeData('./data/inauguration.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'latin-1')
-    mergeData('./data/womenmarch.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'latin-1')
+    # # 2k + 3k - https://www.kaggle.com/adhok93/inauguration-and-womensmarch-tweets
+    # mergeData('./data/inauguration.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'latin-1')
+    # mergeData('./data/womenmarch.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'latin-1')
 
-    # 395k - https://www.kaggle.com/kinguistics/election-day-tweets#election_day_tweets.csv
-    mergeData('./data/election_day_tweets.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'utf-8')
+    # # 395k - https://www.kaggle.com/kinguistics/election-day-tweets#election_day_tweets.csv
+    # mergeData('./data/election_day_tweets.csv', {'text': 'content', 'id': 'tweet_id'}, True, 'utf-8')
 
-    # 3k + 3k + 24k - https://data.world/fivethirtyeight/twitter-ratio
-    tweetIDFromURL('./data/BarackObama.csv')
-    mergeData('./data/BarackObama.csv', {'text': 'content', 'tweet_id': 'tweet_id'}, True, 'latin-1')
-    tweetIDFromURL('./data/realDonaldTrump.csv')
-    mergeData('./data/realDonaldTrump.csv', {'text': 'content', 'tweet_id': 'tweet_id'}, True, 'latin-1')
-    tweetIDFromURL('./data/senators.csv')
-    mergeData('./data/senators.csv', {'text': 'content', 'tweet_id': 'tweet_id'}, True, 'latin-1')
+    # # 3k + 3k + 24k - https://data.world/fivethirtyeight/twitter-ratio
+    # tweetIDFromURL('./data/BarackObama.csv')
+    # mergeData('./data/BarackObama.csv', {'text': 'content', 'tweet_id': 'tweet_id'}, True, 'latin-1')
+    # tweetIDFromURL('./data/realDonaldTrump.csv')
+    # mergeData('./data/realDonaldTrump.csv', {'text': 'content', 'tweet_id': 'tweet_id'}, True, 'latin-1')
+    # tweetIDFromURL('./data/senators.csv')
+    # mergeData('./data/senators.csv', {'text': 'content', 'tweet_id': 'tweet_id'}, True, 'latin-1')
+
+    #mergeData('./data/harvard-dataset/election-filter1_parsed.csv', {'content': 'content', 'tweet_id': 'tweet_id'}, True, 'utf-8')
+    splitData()
 
 
 
