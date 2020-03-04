@@ -37,5 +37,14 @@ def parse():
 
     target.to_csv('./data_parsed/tweet_data_'+str(idx)+'.csv')
 
+def splitFiles():
+    half = 500000
+    for idx in range(21):
+        data = pd.read_csv('./data_parsed/tweet_data_'+str(idx)+'.csv')
+        first = data[0:half]
+        second = data[half:len(data)]
+        first.to_csv('./data_parsed/tweet_data_'+str(idx)+'.csv')
+        second.to_csv('./data_parsed/tweet_data_'+str(21+idx)+'.csv')
+
 if __name__ == '__main__':
-    parse()
+    splitFiles()
