@@ -54,7 +54,7 @@ def tweetIDFromURL(file):
 
 def splitData():
     data = pd.read_csv('tweet_data.csv', index_col='tweet_id', dtype={'tweet_id': 'int64', 'content': str, 'troll': bool})
-    size = 1000000
+    size = 100000
     end = size
     start = 0
     idx = 0

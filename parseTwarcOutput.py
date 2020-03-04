@@ -3,8 +3,8 @@ import numpy as np
 
 def parse():
     parsed = []
-    idx = 4
-    size = 1000000
+    idx = 36
+    size = 100000
     count = 0
     with open('./data/harvard-dataset/election-filter1_hydrated.txt') as infile:
         for line in infile:
@@ -39,12 +39,13 @@ def parse():
 
 def splitFiles():
     half = 500000
-    for idx in range(21):
+    for idx in range(42):
         data = pd.read_csv('./data_parsed/tweet_data_'+str(idx)+'.csv')
-        first = data[0:half]
-        second = data[half:len(data)]
-        first.to_csv('./data_parsed/tweet_data_'+str(idx)+'.csv')
-        second.to_csv('./data_parsed/tweet_data_'+str(21+idx)+'.csv')
+        print(len(data))
+        # first = data[0:half]
+        # second = data[half:len(data)]
+        # first.to_csv('./data_parsed/tweet_data_'+str(idx)+'.csv')
+        # second.to_csv('./data_parsed/tweet_data_'+str(21+idx)+'.csv')
 
 if __name__ == '__main__':
-    splitFiles()
+    parse()
