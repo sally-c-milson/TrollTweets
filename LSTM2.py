@@ -161,7 +161,7 @@ if __name__ == '__main__':
         model.save(path + "true_final_model.hdf5")
     elif run == 'test':
         batch_size = 750
-        model = load_model(path + "true_model-10.hdf5")
+        model = load_model(path + "true_final_model.hdf5")
         data_generator = KerasBatchGenerator(X, y, batch_size)
         score = model.evaluate(data_generator.generate(), steps=2000, verbose=1)
         for i in range(len(score)):
