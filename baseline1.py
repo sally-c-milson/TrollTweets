@@ -3,7 +3,6 @@ import numpy as np
 
 from sklearn import metrics
 from sklearn.model_selection import StratifiedKFold
-from imblearn.over_sampling import SMOTE
 from sklearn.linear_model import Perceptron
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model.logistic import LogisticRegression
@@ -11,12 +10,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import cross_val_score
 
-path = "./data_parsed/"
+path = "./data/"
 
 def load_data(file):
 	raw = pd.DataFrame()
-	for i in range(50):		#currently using data compiled from first 50 csv files
-		new = pd.read_csv(path+file+str(i)+".csv")
+	for i in range(12):		#currently using data compiled from first 50 csv files
+		new = pd.read_csv(path+file+str(i+1)+".csv")
 		raw = pd.concat([raw,new])
 	raw = raw[['content','troll']]
 	#these can be played with, currently set to ignore words in more than half or less than 100
@@ -26,7 +25,7 @@ def load_data(file):
 	return c, raw['troll'], dictionary
 
 
-X, y, dictionary = load_data("tweet_data_")
+X, y, dictionary = load_data("tweet_data_batch")
 X_train, X_test, y_train, y_test = train_test_split(X,y, shuffle = True)
 
 model1 = LogisticRegression(max_iter=400,n_jobs=-1) #increased arbitariy to 400 since default iterations reach limit

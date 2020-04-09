@@ -1,3 +1,4 @@
 data
 tweet_data.csv
 twarc.log
+tokenizer.pkl
