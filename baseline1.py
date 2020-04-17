@@ -14,7 +14,7 @@ path = "./data/"
 
 def load_data(file):
 	raw = pd.DataFrame()
-	for i in range(12):		#currently using data compiled from first 50 csv files
+	for i in range(50):		#set range to contain number of csv files
 		new = pd.read_csv(path+file+str(i+1)+".csv")
 		raw = pd.concat([raw,new])
 	raw = raw[['content','troll']]
